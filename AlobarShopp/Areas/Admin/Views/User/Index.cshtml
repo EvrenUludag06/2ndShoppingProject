@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-primary">Kullanıcı Listesi</h2>
+    </div>
+    <div class="col-md-6">
+        <p>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary form-control"><i class="bi bi-person-fill-add"></i> Kullanıcı Ekle</a>
+        </p>
+    </div>
+</div>
+<table class="table table-striped table-bordered" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Adı
+            </th>
+            <th>
+                Soyadı
+            </th>
+            <th>
+                E-Mail
+            </th>
+            <th>
+                Rol
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id.ToString()" class="btn btn-danger"><i class="bi bi-trash3"></i> Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script type="text/javascript">
+        let table = new DataTable('#myTable');
+    </script>
+}
